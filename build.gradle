@@ -10,6 +10,10 @@ java {
     }
 }
 
+compileJava {
+    options.compilerArgs << '-parameters'
+}
+
 ext {
     javaMainClass = "org.demo.springDemo.SpringDemoApplication"
 }
@@ -18,7 +22,7 @@ application {
     getMainClass().set(javaMainClass)
 }
 
-group 'org.modak.challenge'
+group 'org.demo.springDemo'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -26,25 +30,26 @@ repositories {
 }
 
 dependencies {
-    def springVersion = '3.0.0'
-    def jupiterVersion = '5.9.0'
-    def lombokVersion = '1.18.24'
+    def springVersion = '3.2.3'
+    def jupiterVersion = '5.10.2'
+    def lombokVersion = '1.18.30'
 
-    implementation "org.springframework.boot:spring-boot-starter-data-rest:${springVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-web:${springVersion}"
     implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springVersion}"
     testImplementation "org.springframework.boot:spring-boot-starter-test:${springVersion}"
 
-    implementation "com.zaxxer:HikariCP:5.0.1"
-    implementation "com.h2database:h2:2.1.214"
+    implementation "com.zaxxer:HikariCP:5.1.0"
+    testImplementation "com.h2database:h2:2.2.224"
 
-    implementation "org.hibernate:hibernate-validator:8.0.0.Final"
+    implementation 'org.hibernate.orm:hibernate-core:6.4.4.Final'
+    implementation "org.hibernate:hibernate-validator:8.0.1.Final"
 
-    runtimeOnly "mysql:mysql-connector-java:8.0.31"
+    runtimeOnly "mysql:mysql-connector-java:8.0.33"
 
     testImplementation "org.junit.jupiter:junit-jupiter-api:${jupiterVersion}"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${jupiterVersion}"
 
-    implementation "org.projectlombok:lombok:${lombokVersion}"
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 }

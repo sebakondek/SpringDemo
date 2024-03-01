@@ -2,6 +2,8 @@ package org.demo.springDemo.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 
 @Configuration
+@Setter
+@Getter
 @ConfigurationProperties(prefix = "db.datasource")
 public class DataSourceConfig extends HikariConfig {
 
@@ -25,33 +29,5 @@ public class DataSourceConfig extends HikariConfig {
         System.out.println("jdbcUrl: " + url);
 
         return new HikariDataSource(this);
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-    @Override
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public void setPassword(String password) {
-        this.password = password;
     }
 }
